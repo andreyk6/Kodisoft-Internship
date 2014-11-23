@@ -8,28 +8,35 @@ namespace PluginManager
 {
     public static class Example
     {
-        static void DateDemo(DateTime date)
+        static void PluginCollectionDemo<T>( T value)
         {
-            var plugin = new PluginsCollection<DateTime>();
+            var plugin = new PluginsCollection<T>();
 
-            Console.WriteLine("Current date: {0}", date);
-            Console.WriteLine("Result of the plugin: {0}", plugin.Modify(date));
-        }
-
-        static void IntDemo( int number)
-        {
-            var plugin = new PluginsCollection<int>();
-
-            Console.WriteLine("My number: {0}", number);
-            Console.WriteLine("Result of the plugin: {0}", plugin.Modify(number));
+            Console.WriteLine("My {0}: {1}", value.GetType().Name, value);
+            Console.WriteLine("Result of the plugin: {0}", plugin.Modify(value));
         }
 
         public static void Main()
         {
-            Console.WriteLine("Create Int Plugin:")
-            IntDemo(-5);
+            Console.WriteLine("***** Create Int PluginsCollection ****");
+            PluginCollectionDemo(-5);
+            Console.WriteLine();
 
-            DateDemo(DateTime.Now);
+            Console.WriteLine("***** Create DateTime PluginsCollection *****");
+            PluginCollectionDemo(DateTime.Now);
+            Console.WriteLine();
+
+            Console.WriteLine("***** Create simple PluginClient *****");
+            Console.WriteLine("***** Additional function: i => i * 2 *****");
+            Console.WriteLine("***** Plugin function: i => i^3 *****");
+            var myPlugin = new TestPlugin<int>(i => i * 2, new PluginIntPow3(), 5);
+
+            Console.WriteLine("Data = 5: ");
+            myPlugin.WriteResult();
+
+            Console.WriteLine("Data = -5: ");
+            myPlugin.Data = -5;
+            myPlugin.WriteResult();
 
             Console.ReadLine();
         }
