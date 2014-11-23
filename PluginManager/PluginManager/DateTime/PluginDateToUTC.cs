@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PluginManager
 {
-    class PluginDateToUTC :IPlugin<DateTime>
+    class PluginDateToUTC : IPlugin<DateTime>
     {
          public DateTime Modify(DateTime value)
         {

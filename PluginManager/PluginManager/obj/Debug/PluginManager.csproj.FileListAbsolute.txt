@@ -1,0 +1,5 @@
+C:\Users\Andrey\Documents\GitHub\Kodisoft-Internship\PluginManager\PluginManager\bin\Debug\PluginManager.exe
+C:\Users\Andrey\Documents\GitHub\Kodisoft-Internship\PluginManager\PluginManager\bin\Debug\PluginManager.pdb
+C:\Users\Andrey\Documents\GitHub\Kodisoft-Internship\PluginManager\PluginManager\obj\Debug\PluginManager.csprojResolveAssemblyReference.cache
+C:\Users\Andrey\Documents\GitHub\Kodisoft-Internship\PluginManager\PluginManager\obj\Debug\PluginManager.exe
+C:\Users\Andrey\Documents\GitHub\Kodisoft-Internship\PluginManager\PluginManager\obj\Debug\PluginManager.pdb

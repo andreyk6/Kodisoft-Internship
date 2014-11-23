@@ -8,9 +8,12 @@ namespace PluginManager
 {
     public class PluginIntAbs : IPlugin<Int32>
     {
-         public int Modify(int value)
+        public int Modify(int value)
         {
-            return Math.Abs(value);
+            checked
+            {
+                return Math.Abs(value);
+            }
         }
     }
 }

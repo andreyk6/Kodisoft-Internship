@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PluginManager
 {
-    class PluginCollectionDateTime : IPlugin<DateTime>
+    class PluginsCollectionDateTime : IPlugin<DateTime>
     {
         private List<IPlugin<DateTime>> PluginList = new List<IPlugin<DateTime>> {
             new PluginDateAddDay(),
