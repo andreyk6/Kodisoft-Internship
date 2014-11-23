@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PluginManager
 {
-    class PluginIntPow3 : IPlugin<int>
+    public class PluginIntPow3 : IPlugin<int>
     {
         public int Modify(int value)
         {

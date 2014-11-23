@@ -10,7 +10,7 @@ namespace PluginManager
     {
         static void DateDemo(DateTime date)
         {
-            var plugin = new PluginsCollectionDateTime();
+            var plugin = new PluginsCollection<DateTime>();
 
             Console.WriteLine("Current date: {0}", date);
             Console.WriteLine("Result of the plugin: {0}", plugin.Modify(date));
@@ -18,7 +18,7 @@ namespace PluginManager
 
         static void IntDemo( int number)
         {
-            var plugin = new PluginsCollectionInt();
+            var plugin = new PluginsCollection<int>();
 
             Console.WriteLine("My number: {0}", number);
             Console.WriteLine("Result of the plugin: {0}", plugin.Modify(number));
@@ -26,8 +26,10 @@ namespace PluginManager
 
         public static void Main()
         {
-            DateDemo(DateTime.Now);
+            Console.WriteLine("Create Int Plugin:")
             IntDemo(-5);
+
+            DateDemo(DateTime.Now);
 
             Console.ReadLine();
         }
