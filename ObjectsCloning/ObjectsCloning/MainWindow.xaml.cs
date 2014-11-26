@@ -26,6 +26,14 @@ namespace ObjectsCloning
         }
 
 
+
+
+        private void MainButton_Click(object sender, RoutedEventArgs e)
+        {
+            TestObjectCloning();
+
+            ListCloningDemo();
+        }
         public void TestObjectCloning()
         {
             House baseHouse = new House()
@@ -41,30 +49,30 @@ namespace ObjectsCloning
             #region Create baseHouse clone and write current states
             House myHouse = baseHouse.Clone();
 
-            ConsoleTextBox.Text+=string.Format("baseHouse \n{0}", baseHouse);
-            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            ConsoleTextBox.Text += string.Format("baseHouse \n{0}\n", baseHouse);
+            ConsoleTextBox.Text += string.Format("myHouse \n{0}\n", myHouse);
             #endregion
-            
+
             #region Change Address in myHouse and write states
             myHouse.Address = "Ukraine, Kiev, Metalistiv str., h. 12a";
 
-            ConsoleTextBox.Text+=string.Format("***** After Address changing in myHouse *****");
+            ConsoleTextBox.Text += "***** After Address changing in myHouse *****\n";
 
             Console.WriteLine("baseHouse \n{0}", baseHouse);
-            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            ConsoleTextBox.Text += string.Format("myHouse \n{0}\n", myHouse);
             #endregion
 
             #region Change Animal in myHouse and write states
-            ConsoleTextBox.Text+=string.Format("***** After Animal changing in myHouse *****");
+            ConsoleTextBox.Text += "***** After Animal changing in myHouse *****\n";
 
             myHouse.Owner.Pet = new Animal("Star");
 
-            ConsoleTextBox.Text+=string.Format("baseHouse \n{0}", baseHouse);
-            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            ConsoleTextBox.Text += string.Format("baseHouse \n{0}\n", baseHouse);
+            ConsoleTextBox.Text += string.Format("myHouse \n{0}\n", myHouse);
             #endregion
 
             #region Change Owner in myHouse and write states
-            ConsoleTextBox.Text+=string.Format("***** After Owner changing in myHouse *****");
+            ConsoleTextBox.Text += "***** After Owner changing in myHouse *****\n";
 
             myHouse.Owner = new HouseOwner()
             {
@@ -72,14 +80,31 @@ namespace ObjectsCloning
                 Pet = new Animal("Igor")
             };
 
-            ConsoleTextBox.Text+=string.Format("baseHouse \n{0}", baseHouse);
-            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            ConsoleTextBox.Text += string.Format("baseHouse \n{0}", baseHouse);
+            ConsoleTextBox.Text += string.Format("myHouse \n{0}\n", myHouse);
             #endregion
         }
-
-        private void MainButton_Click(object sender, RoutedEventArgs e)
+        private void ListCloningDemo()
         {
-            TestObjectCloning();
+            List<int> baseList = new List<int>() { 1, 2, 3, 4, 5 };
+            List<int> copyList = baseList;
+            List<int> cloneList = baseList.Clone();
+
+            #region Change cloneList
+            ConsoleTextBox.Text += "***** Change cloneList *****\n";
+            cloneList.Add(-1);
+
+            ConsoleTextBox.Text += "baseList:\n";
+            baseList.ForEach(i => ConsoleTextBox.Text += i + " ");
+            ConsoleTextBox.Text += '\n';
+
+            ConsoleTextBox.Text += "cloneList:\n";
+            cloneList.ForEach(i => ConsoleTextBox.Text += i + " ");
+            ConsoleTextBox.Text += '\n';
+
+            #endregion
+
+
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,15 +41,39 @@ namespace ObjectsCloning
             //Create instance of the object
             var result = (T)Activator.CreateInstance(source.GetType());
 
-            //Fill fields with similar values (Only first level cloning)
-            foreach (var field in source.GetType().GetRuntimeFields())
+            try
             {
+                //Fill fields with similar values (Only first level cloning)
+                foreach (var field in source.GetType().GetProperties())
+                {
                     field.SetValue(result, field.GetValue(source)); // Create and set new instanse of similar object
+                }
             }
-
+            catch (Exception e)
+            {
+                //If 
+                Console.WriteLine("Something went wrong while cloning.\nError message: {0}", e.Message);
+                return source;
+            }
             return result;
             #endregion
         }
 
+        /*
+    public static T Clone<T>(this T objectToCopy)
+    {
+        MemoryStream memoryStream = new MemoryStream();
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        binaryFormatter.Serialize(memoryStream, objectToCopy);
+
+        memoryStream.Position = 0;
+        T returnValue = (T)binaryFormatter.Deserialize(memoryStream);
+
+        memoryStream.Close();
+        memoryStream.Dispose();
+
+        return returnValue;
+    }
+    */
     }
 }
