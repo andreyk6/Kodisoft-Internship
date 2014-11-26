@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ObjectsCloning"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Object Cloning" Height="350" Width="350">
     <Grid>
-        
+        <Label Content="Out TextBox:" Width="100px" Height="25px" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+        <ScrollViewer Margin="0,0,0,40" Height="250" VerticalAlignment="Bottom">
+            <TextBox Name="ConsoleTextBox" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </ScrollViewer>
+        <Button Name="MainButton" Click="MainButton_Click" Content="Call TestObjectCloning()" Width="170px" Height="25px" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,10"></Button> 
     </Grid>
 </Window>

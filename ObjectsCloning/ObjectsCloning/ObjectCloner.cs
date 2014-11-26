@@ -42,11 +42,7 @@ namespace ObjectsCloning
             //Fill fields with similar values (Only first level cloning)
             foreach (var field in source.GetType().GetRuntimeFields())
             {
-                //If value !=null
-                if (field.GetValue(source) == null)
-                    field.SetValue(result, null);
-                else
-                    field.SetValue(result, field.GetValue(source).Clone()); // Create and set new instanse of similar object
+                    field.SetValue(result, field.GetValue(source)); // Create and set new instanse of similar object
             }
 
             return result;

@@ -23,71 +23,63 @@ namespace ObjectsCloning
         public MainWindow()
         {
             InitializeComponent();
-            Test();
         }
 
 
-        public class Evil
+        public void TestObjectCloning()
         {
-            public int evilNum;
+            House baseHouse = new House()
+            {
+                Address = "Kiev, Metalistiv str., h. 7",
+                Owner = new HouseOwner
+                {
+                    Name = "Mr. Mikle",
+                    Pet = new Animal("Lucky")
+                }
+            };
+
+            #region Create baseHouse clone and write current states
+            House myHouse = baseHouse.Clone();
+
+            ConsoleTextBox.Text+=string.Format("baseHouse \n{0}", baseHouse);
+            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            #endregion
+            
+            #region Change Address in myHouse and write states
+            myHouse.Address = "Ukraine, Kiev, Metalistiv str., h. 12a";
+
+            ConsoleTextBox.Text+=string.Format("***** After Address changing in myHouse *****");
+
+            Console.WriteLine("baseHouse \n{0}", baseHouse);
+            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            #endregion
+
+            #region Change Animal in myHouse and write states
+            ConsoleTextBox.Text+=string.Format("***** After Animal changing in myHouse *****");
+
+            myHouse.Owner.Pet = new Animal("Star");
+
+            ConsoleTextBox.Text+=string.Format("baseHouse \n{0}", baseHouse);
+            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            #endregion
+
+            #region Change Owner in myHouse and write states
+            ConsoleTextBox.Text+=string.Format("***** After Owner changing in myHouse *****");
+
+            myHouse.Owner = new HouseOwner()
+            {
+                Name = "Jack",
+                Pet = new Animal("Igor")
+            };
+
+            ConsoleTextBox.Text+=string.Format("baseHouse \n{0}", baseHouse);
+            ConsoleTextBox.Text+=string.Format("myHouse \n{0}\n", myHouse);
+            #endregion
         }
 
-        public class BaseClass
+        private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            int x;
-            string s;
-            public Evil evil;
-            public BaseClass()
-            {
-                x = 0;
-                s = string.Empty;
-                evil = new Evil() { evilNum = 1 };
-            }
-
-            public BaseClass(int x,string s)
-            {
-                this.x = x;
-                this.s = s;
-                evil = new Evil() { evilNum = 1 };
-            }
-        }
-
-        public class MyClass
-        {
-            int n;
-            public List<int> list = new List<int>() { 1, 2, 3 };
-
-            public  BaseClass myClass = new BaseClass(10, "My.BaseClass");
-
-            public MyClass()
-            {
-                n = 0;
-                myClass = new BaseClass();
-            }
-            public MyClass(int n, BaseClass baseClass)
-            {
-                this.n = n;
-                myClass = baseClass;
-            }
-        }
-
-
-        public void Test()
-        {
-            MyClass c1 = new MyClass(32, new BaseClass(1, "c1_string"));
-
-            MyClass c2 = c1.Clone();
-
-            c2.myClass.evil.evilNum = 2;
-
-            c2.myClass = new BaseClass(0, "newBaseClass");
-
-
-            var c3 = c1.Clone();
-
-            c3.myClass.evil.evilNum = 51;
-
-            c3.list.Add(66);
+            TestObjectCloning();
         }
     }
 }
