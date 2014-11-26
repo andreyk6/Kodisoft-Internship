@@ -8,6 +8,7 @@ namespace PluginManager
 {
     class TestPlugin<T> : IPluginClient<T>
     {
+        //Current object function
         private Func<T,T> AdditionalFunc;
         public TestPlugin(Func<T,T> additionalFunc, IPlugin<T> plugin, T data) : base (plugin, data)
         {
