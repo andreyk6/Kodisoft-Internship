@@ -87,7 +87,6 @@ namespace ObjectsCloning
         private void ListCloningDemo()
         {
             List<int> baseList = new List<int>() { 1, 2, 3, 4, 5 };
-            List<int> copyList = baseList;
             List<int> cloneList = baseList.Clone();
 
             #region Change cloneList
@@ -101,7 +100,6 @@ namespace ObjectsCloning
             ConsoleTextBox.Text += "cloneList:\n";
             cloneList.ForEach(i => ConsoleTextBox.Text += i + " ");
             ConsoleTextBox.Text += '\n';
-
             #endregion
 
 

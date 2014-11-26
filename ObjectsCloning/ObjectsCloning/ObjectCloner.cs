@@ -51,29 +51,12 @@ namespace ObjectsCloning
             }
             catch (Exception e)
             {
-                //If 
+                //If exception happen - return reference
                 Console.WriteLine("Something went wrong while cloning.\nError message: {0}", e.Message);
                 return source;
             }
             return result;
             #endregion
         }
-
-        /*
-    public static T Clone<T>(this T objectToCopy)
-    {
-        MemoryStream memoryStream = new MemoryStream();
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        binaryFormatter.Serialize(memoryStream, objectToCopy);
-
-        memoryStream.Position = 0;
-        T returnValue = (T)binaryFormatter.Deserialize(memoryStream);
-
-        memoryStream.Close();
-        memoryStream.Dispose();
-
-        return returnValue;
-    }
-    */
     }
 }
