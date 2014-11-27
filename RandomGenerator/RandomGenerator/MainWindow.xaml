@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RandomGenerator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
     <Grid>
-        
+        <Label Content="Out TextBlock:" Width="100px" Height="25px" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ScrollViewer  Width="Auto" Height="249" VerticalAlignment="Bottom" Margin="10,0,10,40">
+            <TextBlock Name="ConsoleTextBlock" Width="Auto" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </ScrollViewer>
+        <Button Name="MainButton" Content="Load 20 000 random numbers"  Click="MainButton_Click" Width="170" Height="25px" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10"/>
+
+
     </Grid>
 </Window>
