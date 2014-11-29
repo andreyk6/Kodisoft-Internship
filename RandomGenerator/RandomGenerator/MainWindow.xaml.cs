@@ -14,20 +14,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RandomGenerator
+namespace RandomGeneratorProblem
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        RandomOrg random;
+        RandomGenerator random;
 
         public MainWindow()
         {
             InitializeComponent();
             //Create RandomOrg object
-            random = new RandomOrg(10, 50);
+            random = new RandomGenerator(10, 100, 1000);
         }
 
         private async void MainButton_Click(object sender, RoutedEventArgs e)
@@ -40,24 +40,24 @@ namespace RandomGenerator
             return Task.Run(() =>
             {
                 //Format result string
-                string textBoxResult = "";
+                string resultString = "";
 
                 this.Dispatcher.Invoke((Action)(() =>
                 {
-                    ConsoleTextBlock.Text += "Loading numbers...\n";
+                    OutTextBlock.Text = "Loading numbers...\n";
                 }));
 
                 foreach (int n in random.GetNumbers(count))
                 {
-                    textBoxResult += n + "; ";
+                    resultString += n + "; ";
                 }
 
                 this.Dispatcher.Invoke((Action)(() =>
                 {
                     //Remove @"Loading numbers...\n" 
-                    ConsoleTextBlock.Text = ConsoleTextBlock.Text.Substring(0, ConsoleTextBlock.Text.Length - "Loading numbers...\n".Length);
+                    OutTextBlock.Text = OutTextBlock.Text.Substring(0, OutTextBlock.Text.Length - "Loading numbers...\n".Length);
                     //Add random numbers
-                    ConsoleTextBlock.Text += "Your numbers: \n" + textBoxResult + "\n";
+                    OutTextBlock.Text += "Your numbers: \n" + resultString + "\n";
                 }));
             }
             );

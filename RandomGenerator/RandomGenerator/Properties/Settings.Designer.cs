@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RandomGenerator.Properties
+namespace RandomGeneratorProblem.Properties
 {
 
 

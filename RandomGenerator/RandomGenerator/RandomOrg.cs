@@ -8,24 +8,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace RandomGenerator
+namespace RandomGeneratorProblem
 {
-    class RandomNetQueue
+    class RandomOrg
     {
-        Queue<int> RandomNumbers = new Queue<int>();
+        Queue<int> Numbers = new Queue<int>();
         public bool NetworkError = false;
         private bool LoadingProcess = false;
         int MaxValue { get; set; }
         int MinValue { get; set; }
 
-
-
         public int Next
         {
             get
             {
-                if (RandomNumbers.Count != 0)
-                    return RandomNumbers.Dequeue();
+                if (Numbers.Count != 0)
+                    return Numbers.Dequeue();
                 else return 0;
             }
         }
@@ -34,27 +32,31 @@ namespace RandomGenerator
         {
             get
             {
-                return RandomNumbers.Count();
+                return Numbers.Count();
             }
         }
 
-        public RandomNetQueue() : this(int.MinValue, int.MaxValue) { }
+        public RandomOrg() : this(int.MinValue, int.MaxValue) { }
 
-        public RandomNetQueue(int min, int max)
+        public RandomOrg(int min, int max)
         {
             MinValue = min;
             MaxValue = max;
         }
 
-        public void GetNewNumbers(int count = 10)
+        public void GetNewNumbers(int count)
         {
             //Protect from next DownloadRandomNumber call before last iteration finish
             if (LoadingProcess == false)
             {
-                //Clear previous numbers
-                RandomNumbers.Clear();
-                //Get new numbers
-                DownloadRandomNumbers(count);
+                //Fill Queue fully
+                if (count - Numbers.Count > 0)
+                    DownloadRandomNumbers(count - Numbers.Count);
+                else
+                {
+                    Numbers.Clear();
+                    DownloadRandomNumbers(count);
+                } 
             }
 
         }
@@ -75,7 +77,7 @@ namespace RandomGenerator
                     response = response.Substring(0, response.Length - 2);
                     
                     //Parse numbers and add to Enquenu
-                    foreach (string num in response.Split('\n')) RandomNumbers.Enqueue(int.Parse(num));
+                    foreach (string num in response.Split('\n')) Numbers.Enqueue(int.Parse(num));
                 }
             }
             catch (Exception e)
@@ -83,7 +85,7 @@ namespace RandomGenerator
                 //If NetworkError = true - request will never sent 
                 NetworkError = true;
 
-                MessageBox.Show("Error occurred " + e.Message);
+                MessageBox.Show("Error occurred!!!\n" + e.Message);
             }
 
             LoadingProcess = false;

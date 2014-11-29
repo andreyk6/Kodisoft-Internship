@@ -5,21 +5,32 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RandomGenerator
+namespace RandomGeneratorProblem
 {
-    public class RandomOrg
+    public class RandomGenerator
     {
-        RandomNetQueue NetRandom;
-        Random LocalRandom = new Random();
+        RandomOrg NetRandom;
+        System.Random LocalRandom = new System.Random();
         int MaxValue { get; set; }
         int MinValue { get; set; }
+        int _permanentCount; //Number of elements, which must always be in Queue
+        int PermanentCount
+        {
+            set
+            {
+                if (value > 0)
+                    _permanentCount = value;
+                else
+                    throw new ArgumentException("PermanentCount must be more then zero!!!");
+            }
+        }
 
-        public RandomOrg() : this(int.MinValue, int.MaxValue) { }
-        public RandomOrg(int minValue, int maxValue)
+        public RandomGenerator(int minValue, int maxValue, int permanentCount = 10)
         {
             MinValue = minValue;
             MaxValue = maxValue;
-            NetRandom = new RandomNetQueue(minValue, maxValue);
+            PermanentCount = permanentCount;
+            NetRandom = new RandomOrg(minValue, maxValue);
         }
 
         public IEnumerable<int> GetNumbers(int count)
@@ -30,21 +41,22 @@ namespace RandomGenerator
                 {
                     //Return NetRandom number and add 10000 for visualization
                     //yield return NetRandom.Next + 10000;
-                    yield return NetRandom.Next;
+                    yield return NetRandom.Next + 10000;
                 }
                 else
                 if (!NetRandom.NetworkError && NetRandom.Count == 0)
                 {
                     //Request for load new numbers
-                    NetRandom.GetNewNumbers();
+                    NetRandom.GetNewNumbers(_permanentCount);
+                    Thread.Sleep(1);
                     //Return number from local Random
                     yield return LocalRandom.Next(MinValue, MaxValue);
                 }
                 else
                     yield return LocalRandom.Next(MinValue, MaxValue);
             }
-            //TODO Uncomment if you need random numbers loading for future using 
-            //if (!NetRandom.NetworkError) NetRandom.GetNewNumbers(N);
+            //Load random numbers for future using 
+            if (!NetRandom.NetworkError) NetRandom.GetNewNumbers(_permanentCount);
         }
 
     }
