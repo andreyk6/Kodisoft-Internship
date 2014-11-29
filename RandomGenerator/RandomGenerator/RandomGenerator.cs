@@ -39,16 +39,15 @@ namespace RandomGeneratorProblem
             {
                 if (!NetRandom.NetworkError && NetRandom.Count > 0)
                 {
-                    //Return NetRandom number and add 10000 for visualization
-                    //yield return NetRandom.Next + 10000;
+                    //Return NetRandom number and add 10000 for visualization random numbers from RandomOrg
                     yield return NetRandom.Next + 10000;
+                    //yield return NetRandom.Next
                 }
                 else
                 if (!NetRandom.NetworkError && NetRandom.Count == 0)
                 {
                     //Request for load new numbers
                     NetRandom.GetNewNumbers(_permanentCount);
-                    Thread.Sleep(1);
                     //Return number from local Random
                     yield return LocalRandom.Next(MinValue, MaxValue);
                 }
